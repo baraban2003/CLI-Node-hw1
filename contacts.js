@@ -15,7 +15,7 @@ async function listContacts() {
 
 async function getContactById(contactId) {
   const allContacts = await listContacts();
-
+  console.log(allContacts);
   const oneContact = allContacts.find((e) => e.id === contactId);
 
   if (!oneContact) {
@@ -26,6 +26,7 @@ async function getContactById(contactId) {
 
 async function removeContact(contactId) {
   const allContacts = await listContacts();
+
   const idx = allContacts.findIndex((e) => e.id === contactId);
   if (idx === -1) {
     return null;
@@ -38,10 +39,10 @@ async function removeContact(contactId) {
 async function addContact(name, email, phone) {
   const allContacts = await listContacts();
   const newContact = {
+    id: nanoid(),
     name,
     email,
     phone,
-    id: nanoid(),
   };
   allContacts.push(newContact);
   await updateContacts(allContacts);
